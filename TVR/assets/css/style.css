@@ -1,0 +1,348 @@
+body {
+  margin: 0;
+  background-color: #0a0a0a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.top-bar::before,
+.top-bar::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: white;
+}
+
+.top-logo {
+  height: 50px;
+  margin: 0 30px;
+}
+
+.github-fixed {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 999;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.github-icon {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  transition: opacity 0.3s;
+}
+
+.github-fixed:hover .github-icon {
+  opacity: 0.7;
+}
+
+.main-flex {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.phone-controls-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.reboot-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 110px 0px 30px 0px;
+}
+
+.reboot-shine-wrapper {
+  position: relative;
+  width: 550px;
+  max-width: 90vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reboot-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 2s ease, transform 2s ease;
+}
+
+.reboot-logo.fade-in {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reboot-shine-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  transform: skewX(-20deg);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0;
+}
+
+.reboot-shine-wrapper.start-shine::after {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(0, 140, 255, 0.3) 50%,
+    transparent 100%
+  );
+  opacity: 1;
+  animation: shine-sweep 1.5s ease-in-out 1 forwards;
+}
+
+.scroll-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0;
+  height: 60px;
+  overflow: hidden;
+}
+
+.arrow-line {
+  width: 4px;
+  height: 40px;
+  background-color: white;
+  transform: translateY(-100%);
+  animation: drop-line 1s ease-out 1.2s forwards;
+}
+
+.arrow-tip {
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid white;
+  clip-path: inset(0 0 100% 0);
+  animation: unmask-tip 0.6s ease-out 2.2s forwards;
+  margin-top: -2px;
+}
+
+.start-bounce {
+  animation: bounce-pair 1.4s ease-in-out infinite;
+}
+
+.phone-wrapper {
+  position: relative;
+  width: 320px;
+  aspect-ratio: 9 / 18;
+  transition: transform 2.5s ease, opacity 2.5s ease;
+  transform: translateX(-100vw) rotateY(0deg);
+  opacity: 0;
+  margin-bottom: -10px;
+}
+
+.phone-wrapper.animate-in {
+  transform: translateX(0) rotateY(360deg);
+  opacity: 1;
+}
+
+.phone-wrapper.animate-out {
+  transform: translateX(-100vw) rotateY(0deg);
+  opacity: 0;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.video-behind {
+  position: absolute;
+  top: 6.2%;
+  left: 5%;
+  width: 90%;
+  height: 88.5%;
+  border-radius: 32px;
+  overflow: hidden;
+  z-index: 1;
+  background-color: black;
+}
+
+.video-behind video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 32px;
+}
+
+.phone-overlay {
+  position: relative;
+  width: 100%;
+  height: 97%;
+  z-index: 2;
+  pointer-events: none;
+  display: block;
+}
+
+.controls {
+  border-radius: 14px;
+  padding: 0px 14px;
+  width: 90%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  pointer-events: none;
+}
+
+.controls.controls-in {
+  opacity: 1;
+  transform: translateY(20px);
+  pointer-events: auto;
+}
+
+.controls.controls-out {
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+}
+
+.controls input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  background: #ccc;
+  border-radius: 3px;
+  outline: none;
+  cursor: pointer;
+}
+
+.controls input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  background: #0d5ac2;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  position: relative;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+#remainingTime {
+  position: absolute;
+  right: 0;
+  color: white;
+  font-size: 14px;
+  min-width: 40px;
+  text-align: right;
+}
+
+@media (max-width: 600px) {
+  .top-logo {
+    height: 40px;
+    margin: 0 15px;
+  }
+
+  .reboot-shine-wrapper {
+    width: 80%;
+  }
+
+  .phone-wrapper {
+    width: 90vw;
+  }
+
+  .controls {
+    max-width: 90vw;
+    padding: 8px;
+    gap: 8px;
+  }
+
+  .controls button {
+    font-size: 20px;
+  }
+
+  #remainingTime {
+    font-size: 12px;
+  }
+}
+
+/* animations */
+@keyframes shine-sweep {
+  0% {
+    left: -100%;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes drop-line {
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes unmask-tip {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes bounce-pair {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+}
